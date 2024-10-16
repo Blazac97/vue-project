@@ -45,11 +45,15 @@
               <v-row>
                 <v-btn
                   class="ml-auto mr-2"
+                  color="red-darken-1"
                   text="Cancel"
+                  variant="tonal"
                   @click="isActive.value = false"
                 />
                 <v-btn
+                  color="green-accent-4"
                   text="Save"
+                  variant="tonal"
                   @click="$emit(`onSubmit`,{name:$data.postName})"
                 />
               </v-row>
@@ -78,7 +82,7 @@
 
 <script lang="ts">
   export default {
-    props: [''],
+    props: ['name'],
     emits: ['onSubmit'],
     data: () => ({
       postName: '',

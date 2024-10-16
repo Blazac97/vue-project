@@ -15,12 +15,16 @@
     >
       <template #append>
         <div class="d-flex justify-space-between mr-4">
-          <v-btn
-            class="mr-6"
-            color="orange-lighten-4"
-            icon="mdi-pencil"
-            variant="tonal"
-          />
+          <PostModal :name="name" @on-submit="postStore.updatePost">
+            <template #activator>
+              <v-btn
+                class="mr-6"
+                color="orange-lighten-4"
+                icon="mdi-pencil"
+                variant="tonal"
+              />
+            </template>
+          </postmodal>
           <v-btn
             color="red-darken-1"
             icon="mdi-close"
