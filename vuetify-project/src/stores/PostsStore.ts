@@ -6,16 +6,16 @@ import { IPost } from './types'
 interface IPostsStoreState {
   data:null|IPost[]
   showModal:boolean
-  filteredItems:null|IPost[]
-   searchText:null|string
+  filteredPosts:null|IPost[]
+  searchText:null|string
 }
 
 export const usePostsStore = defineStore('posts', {
   state: ():IPostsStoreState => ({
     data: null,
     showModal: false,
-    filteredItems: null,
     searchText: null,
+    filteredPosts: null,
   }),
   actions: {
     initialize () {
@@ -24,6 +24,9 @@ export const usePostsStore = defineStore('posts', {
     },
     setData (newData: any) {
       this.data = newData
+    },
+    createPost ({ name }:any) {
+      this.data?.unshift({ name, id: Date.now().toString() })
     },
 
     updatePost (id: string, name: string) {
@@ -39,14 +42,15 @@ export const usePostsStore = defineStore('posts', {
     },
 
   },
+
   getters: {
-    filtredData  () {
-      if (!this.searchText) {
-        this.filteredItems = this.data
+    filteredData: state => {
+      if (!state.searchText) {
+        return state.data
       } else {
-        this.filteredItems = this.data!.filter(item => item.name.includes(this.searchText!))
-        console.log(this.filteredItems)
+        return state.data!.filter(item => item.name.includes(state.searchText!))
       }
     },
   },
+
 })
