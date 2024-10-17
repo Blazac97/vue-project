@@ -47,6 +47,7 @@
                 />
                 <v-btn
                   color="green-accent-4"
+                  :disabled="!postName"
                   text="Save"
                   variant="tonal"
                   @click="$emit(`onSubmit`,{name:postName,id:postId});isActive.value = false"

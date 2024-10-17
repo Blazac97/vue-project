@@ -5,17 +5,18 @@
   >
     <v-list-item
       :key="id"
-      class="d-flex align-center justify-space-between  "
-      :class="{ 'on-hover': isHovering }"
+      class="d-flex align-center justify-space-between "
+      :class="{ 'on-hover': isHovering ,'bg-grey-darken-3':isSelected}"
       :elevation="isHovering ? 16 : 2"
       height="6vw"
       rounded="lg"
       :subtitle="`id: ${id}`"
       :title="`${name}`"
       v-bind="props"
+      @click="$emit(`onClick`)"
     >
       <template #append>
-        <div class="d-flex justify-space-between mr-4">
+        <div class="d-flex justify-space-between  mr-6">
           <PostModal :id="id" :name="name" @on-submit="postStore.updatePost">
             <template #activator>
               <v-btn
@@ -45,8 +46,15 @@
   defineProps({
     id: String,
     name: String,
+    isSelected: Boolean,
   })
+
+  defineEmits([
+    'onClick',
+  ])
+
 </script>
+
 <style lang="sass" scoped>
 .v-list-item.on-hover.v-theme--dark
   background-color: rgba(#FFF, 0.2)

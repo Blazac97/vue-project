@@ -8,6 +8,7 @@ interface IPostsStoreState {
   showModal:boolean
   filteredPosts:null|IPost[]
   searchText:null|string
+  selectedPost: string|null
 }
 
 export const usePostsStore = defineStore('posts', {
@@ -16,20 +17,28 @@ export const usePostsStore = defineStore('posts', {
     showModal: false,
     searchText: null,
     filteredPosts: null,
+    selectedPost: null,
+
   }),
   actions: {
     initialize () {
-      const localStorageData = localStorage.getItem('data')
+      let localStorageData:any = localStorage.getItem('data')
+      if (localStorageData) {
+        localStorageData = JSON.parse(localStorageData)
+      }
       this.setData(localStorageData || posts)
+      this.$subscribe((_, state) => {
+        localStorage.setItem('data', JSON.stringify(state.data))
+      })
     },
-    setData (newData: any) {
+    setData (newData: IPostsStoreState['data']) {
       this.data = newData
     },
-    createPost ({ name }:any) {
+    createPost ({ name }:Omit<IPost, 'id'>) {
       this.data?.unshift({ name, id: Date.now().toString() })
     },
 
-    updatePost ({ name, id }:any) {
+    updatePost ({ name, id }:IPost) {
       this.data = this.data!.map(post => {
         if (post.id === id) {
           post.name = name
@@ -40,6 +49,9 @@ export const usePostsStore = defineStore('posts', {
     deletePost (id: string) {
       this.data = this.data!.filter(post => post.id !== id)
     },
+    selectPost (id:string) {
+      this.selectedPost = id
+    },
   },
 
   getters: {
@@ -47,7 +59,7 @@ export const usePostsStore = defineStore('posts', {
       if (!state.searchText) {
         return state.data
       } else {
-        return state.data!.filter(item => item.name.includes(state.searchText!))
+        return state.data!.filter(item => item.name.toUpperCase().includes(state.searchText!.toUpperCase()))
       }
     },
   },
