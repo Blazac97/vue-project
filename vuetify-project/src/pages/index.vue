@@ -65,8 +65,4 @@
 <script setup lang="ts">
   import { usePostsStore } from '@/stores/PostsStore'
   const postStore = usePostsStore()
-
-  onMounted(() => {
-    console.log(postStore.data)
-  })
 </script>

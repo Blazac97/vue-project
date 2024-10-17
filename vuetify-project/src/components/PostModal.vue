@@ -7,15 +7,13 @@
       </div>
 
     </template>
-
     <template #default="{ isActive }">
       <v-card
         class="mx-auto"
         max-width="70vw"
       >
         <v-card-title>
-          Posts
-
+          Post
           <v-container>
             <v-row>
 
@@ -32,12 +30,9 @@
                   width="30vw"
                 />
               </v-col>
-
             </v-row>
           </v-container>
-
         </v-card-title>
-
         <v-divider />
         <template #actions>
           <v-container>
@@ -54,27 +49,13 @@
                   color="green-accent-4"
                   text="Save"
                   variant="tonal"
-                  @click="$emit(`onSubmit`,{name:$data.postName})"
+                  @click="$emit(`onSubmit`,{name:postName,id:postId})"
                 />
               </v-row>
             </v-col>
           </v-container>
-
         </template>
       </v-card>
-
-      <!-- <v-card
-        text="When using the activator slot, you must bind the slot props to the activator element."
-        title="Slot Activator"
-      >
-        <template #actions>
-          <v-btn
-            class="ml-auto"
-            text="Close"
-            @click="isActive.value = false"
-          />
-        </template>
-      </v-card> -->
     </template>
   </v-dialog>
 
@@ -82,10 +63,16 @@
 
 <script lang="ts">
   export default {
-    props: ['name'],
+    props: ['name', 'id'],
     emits: ['onSubmit'],
     data: () => ({
       postName: '',
+      postId: '',
     }),
+    created () {
+      this.postName = this.name
+      this.postId = this.id
+    },
+
   }
 </script>

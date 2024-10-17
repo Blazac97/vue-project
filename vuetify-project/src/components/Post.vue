@@ -15,7 +15,7 @@
     >
       <template #append>
         <div class="d-flex justify-space-between mr-4">
-          <PostModal :name="name" @on-submit="postStore.updatePost">
+          <PostModal :id="id" :name="name" @on-submit="postStore.updatePost">
             <template #activator>
               <v-btn
                 class="mr-6"

@@ -29,7 +29,7 @@ export const usePostsStore = defineStore('posts', {
       this.data?.unshift({ name, id: Date.now().toString() })
     },
 
-    updatePost (id: string, name: string) {
+    updatePost ({ name, id }:any) {
       this.data = this.data!.map(post => {
         if (post.id === id) {
           post.name = name
@@ -37,10 +37,9 @@ export const usePostsStore = defineStore('posts', {
         return post
       })
     },
-    deletePost (id:string) {
-      this.data = this.data!.filter(el => el.id !== id)
+    deletePost (id: string) {
+      this.data = this.data!.filter(post => post.id !== id)
     },
-
   },
 
   getters: {
