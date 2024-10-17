@@ -49,7 +49,7 @@
                   color="green-accent-4"
                   text="Save"
                   variant="tonal"
-                  @click="$emit(`onSubmit`,{name:postName,id:postId})"
+                  @click="$emit(`onSubmit`,{name:postName,id:postId});isActive.value = false"
                 />
               </v-row>
             </v-col>
