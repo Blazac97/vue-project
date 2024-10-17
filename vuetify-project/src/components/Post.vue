@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-  import { usePostsStore } from '@/stores/PostsStore'
+  import { usePostsStore } from '@/stores/posts'
   const postStore = usePostsStore()
   defineProps({
     id: String,

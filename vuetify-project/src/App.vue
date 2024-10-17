@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { usePostsStore } from '@/stores/PostsStore'
+  import { usePostsStore } from '@/stores/posts'
   const postStore = usePostsStore()
 
   onMounted(() => {

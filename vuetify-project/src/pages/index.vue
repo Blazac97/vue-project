@@ -5,10 +5,8 @@
   >
     <v-card-title>
       Posts
-
       <v-container>
         <v-row>
-
           <v-col
             cols="20"
             md="9"
@@ -33,16 +31,11 @@
                 > Create </v-btn>
               </template>
             </PostModal>
-
           </v-col>
-
         </v-row>
       </v-container>
-
     </v-card-title>
-
     <v-divider />
-
     <v-virtual-scroll
       v-if="postStore.filteredData"
       height="40vw"
@@ -52,17 +45,15 @@
       <template #default="{ item }">
         <Post :id="item.id" :name="item.name" />
       </template>
-
     </v-virtual-scroll>
     <v-input
       v-model="postStore.searchText"
       placeholder="Search by name..."
     />
-
   </v-card>
 </template>
 
 <script setup lang="ts">
-  import { usePostsStore } from '@/stores/PostsStore'
+  import { usePostsStore } from '@/stores/posts'
   const postStore = usePostsStore()
 </script>
