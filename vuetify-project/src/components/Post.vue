@@ -4,6 +4,7 @@
     close-delay="200"
   >
     <v-list-item
+      :key="id"
       class="d-flex align-center justify-space-between  "
       :class="{ 'on-hover': isHovering }"
       :elevation="isHovering ? 16 : 2"
