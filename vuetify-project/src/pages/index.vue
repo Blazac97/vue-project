@@ -43,7 +43,7 @@
       :items="postStore.filteredData"
     >
       <template #default="{ item }">
-        <Post :id="item.id" :name="item.name" />
+        <Post :id="item.id" :is-selected="postStore.selectedPost === item.id" :name="item.name" @on-click="postStore.selectPost(item.id)" />
       </template>
     </v-virtual-scroll>
     <v-input
