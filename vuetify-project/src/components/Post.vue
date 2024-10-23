@@ -40,19 +40,16 @@
   </v-hover>
 </template>
 
-<script setup>
+<script lang="ts">
   import { usePostsStore } from '@/stores/posts'
-  const postStore = usePostsStore()
-  defineProps({
-    id: String,
-    name: String,
-    isSelected: Boolean,
-  })
-
-  defineEmits([
-    'onClick',
-  ])
-
+  export default {
+    props: ['name', 'id', 'isSelected'],
+    emits: ['onClick'],
+    setup () {
+      const postStore = usePostsStore()
+      return { postStore }
+    },
+  }
 </script>
 
 <style lang="sass" scoped>

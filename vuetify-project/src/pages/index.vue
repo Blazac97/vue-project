@@ -53,7 +53,12 @@
   </v-card>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
   import { usePostsStore } from '@/stores/posts'
-  const postStore = usePostsStore()
+  export default {
+    setup () {
+      const postStore = usePostsStore()
+      return { postStore }
+    },
+  }
 </script>
